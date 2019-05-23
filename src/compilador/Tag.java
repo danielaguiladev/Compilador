@@ -56,6 +56,14 @@ public enum Tag {
     
     // palavra reservada
     KW,
-    
+    KW_PUBLIC,
+    KW_CLASS,
+    KW_END,
+    KW_INTEGER,
+    KW_DOUBLE,
+    KW_STRING,
+    KW_BOOLEAN,
+    KW_FLOAT,
+    KW_SYSTEMOUTDISPLN;
       
 }

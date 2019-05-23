@@ -19,6 +19,15 @@ public class TS {
         word = new Token(Tag.KW, "public", 0, 0);
         this.tabelaSimbolos.put("public", word);
         
+        word = new Token(Tag.KW, "static", 0, 0);
+        this.tabelaSimbolos.put("static", word);
+        
+        word = new Token(Tag.KW, "void", 0, 0);
+        this.tabelaSimbolos.put("void", word);
+        
+        word = new Token(Tag.KW, "main", 0, 0);
+        this.tabelaSimbolos.put("main", word);
+        
         word = new Token(Tag.KW, "class", 0, 0);
         this.tabelaSimbolos.put("class", word);
         
@@ -39,15 +48,6 @@ public class TS {
         
         word = new Token(Tag.KW, "boolean", 0, 0);
         this.tabelaSimbolos.put("boolean", word);
-        
-        word = new Token(Tag.KW, "static", 0, 0);
-        this.tabelaSimbolos.put("static", word);
-        
-        word = new Token(Tag.KW, "void", 0, 0);
-        this.tabelaSimbolos.put("void", word);
-        
-        word = new Token(Tag.KW, "main", 0, 0);
-        this.tabelaSimbolos.put("main", word);
         
         word = new Token(Tag.KW, "return", 0, 0);
         this.tabelaSimbolos.put("return", word);

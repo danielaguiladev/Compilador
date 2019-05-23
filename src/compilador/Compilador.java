@@ -11,6 +11,6 @@ public class Compilador {
         // TODO code application logic here
         Lexer lexer = new Lexer(tabelaSimbolos, "hellojavinha.jvn");
         Parser parser = new Parser(lexer);
-        parser.nonRecursiveParser();
+        parser.initParser();
     }
 }

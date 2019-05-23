@@ -3,7 +3,7 @@
 **/
 public class Teste1 {
    // metodo construtor
-   void teste1( ) { 
+   void teste1() { 
       println("metodo faz nada");
    } 
 
