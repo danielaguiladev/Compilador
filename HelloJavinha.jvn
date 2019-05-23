@@ -1,0 +1,14 @@
+/**
+*** Primeiro Teste: Javazim
+**/
+public class Teste1 {
+   // metodo construtor
+   void teste1( ) { 
+      println("metodo faz nada");
+   } 
+
+   public static void main ( ) { 
+      println("chamada para um metodo"); 
+      teste1( );
+   }
+}
