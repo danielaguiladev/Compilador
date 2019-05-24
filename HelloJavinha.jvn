@@ -1,14 +1,29 @@
-/**
-*** Primeiro Teste: Javazim
-**/
-public class Teste1 {
-   // metodo construtor
-   void teste1() { 
-      println("metodo faz nada");
-   } 
+// Segundo Teste: Javazim
 
-   public static void main ( ) { 
-      println("chamada para um metodo"); 
-      teste1( );
+public class Teste2 {
+
+   public static void main( ) {
+      string w;
+      int x;
+      float y;
+      boolean z;
+
+      w = "ok";
+      x = -10;
+      y = -(x - x);
+
+      // primeira atribuicao
+      if(y == 0) {
+         z = true;
+      }
+      else {
+         z = false; // segunda atribuicao
+         y = (x + y) - (x * y / 23.0);
+         if !((y >= 0 && y <= 10) || y != 5) {
+            z = true; // terceira atribuicao
+         }
+      }
+      print("z: ");
+      println(z);
    }
 }
