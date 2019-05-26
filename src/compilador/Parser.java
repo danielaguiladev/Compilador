@@ -4,7 +4,7 @@ import java.util.Stack;
 
 /**
  *
- * @author 132683
+ * @author Daniel e Pedro Ely
  */
 public class Parser extends ParsingTable {
 
@@ -37,13 +37,13 @@ public class Parser extends ParsingTable {
             } else if (ehTerminal(top)) {
                 if (!top.equals(token.getLexema())) {
                     resultadoParser += "Erro Sintático (Skip): Token Inesperado: ( " + token.getLexema() + " ) " + "\n";
-                    getProxToken();
+                    ProxToken();
                     skip = true;
                 } else {
                     skip = false;
                     System.out.println("Matching terminal: ( " + token.getLexema() + " )");
                     resultadoParser += "Matching terminal: ( " + token.getLexema() + " )\n";
-                    getProxToken();
+                    ProxToken();
                 }
             }
             if (token.getLexema().equals("EOF")) {
@@ -89,7 +89,7 @@ public class Parser extends ParsingTable {
     }
 
     private boolean ehTerminal(String s) {
-        for (String terminal : terminals) {
+        for (String terminal : terminais) {
             if (s.equals(terminal)) {
                 return true;
             }
@@ -98,7 +98,7 @@ public class Parser extends ParsingTable {
     }
 
     private boolean naoEhTerminal(String s) {
-        for (String nonTerminal : nonTerminals) {
+        for (String nonTerminal : naoTerminais) {
             if (s.equals(nonTerminal)) {
                 return true;
             }
@@ -106,7 +106,7 @@ public class Parser extends ParsingTable {
         return false;
     }
 
-    private String getProxToken() {
+    private String ProxToken() {
         token = lexer.proxToken();
         String tokenLexema = token.getLexema();
         return tokenLexema;
@@ -124,27 +124,35 @@ public class Parser extends ParsingTable {
         resultadoParser += message + "\n";
         System.out.println(resultadoParser);
     }
+    
+    private void sync() {
+        exibeErro("Erro (Synch): ( " + token.getLexema() + " ) ");
+        numErros++;
+        top = pop();
+        String rule = this.getRegra(top, token.getLexema());
+        this.pushRegra(rule);
+        skip = false;
+    }
+    
+    private void skip() {
+        exibeErro("Erro (Skip): ( " + token.getLexema() + " ) ");
+        numErros++;
+        ProxToken();
+        skip = true;
+    }
 
-    private String getRegra(String nonTerminal, String terminal) {
-        int row = getNaoTerminal(nonTerminal);
+    private String getRegra(String nT, String terminal) {
+        int row = getNaoTerminal(nT);
         int column = getTerminal(terminal);
 
-        String regra = preditiveTable[row][column];
+        String regra = tabelaPreditiva[row][column];
 
         switch (regra) {
             case "synch":
-                exibeErro("Erro (Synch): ( " + token.getLexema() + " ) ");
-                numErros++;
-                top = pop();
-                String rule = this.getRegra(top, token.getLexema());
-                this.pushRegra(rule);
-                skip = false;
+                sync();
                 break;
             case "skip":
-                exibeErro("Erro (Skip): ( " + token.getLexema() + " ) ");
-                numErros++;
-                getProxToken();
-                skip = true;
+                skip();
                 break;
             default:
                 skip = false;
@@ -153,19 +161,19 @@ public class Parser extends ParsingTable {
         return regra;
     }
 
-    private int getNaoTerminal(String nonTerminal) {
-        for (int i = 0; i < nonTerminals.length; i++) {
-            if (nonTerminal.equals(nonTerminals[i])) {
+    private int getNaoTerminal(String nT) {
+        for (int i = 0; i < naoTerminais.length; i++) {
+            if (nT.equals(naoTerminais[i])) {
                 return i;
             }
         }
-        exibeErro(nonTerminal + " não é um não terminal");
+        exibeErro(nT + " não é um não terminal");
         return -1;
     }
 
     private int getTerminal(String terminal) {
-        for (int i = 0; i < terminals.length; i++) {
-            if (terminal.equals(terminals[i])) {
+        for (int i = 0; i < terminais.length; i++) {
+            if (terminal.equals(terminais[i])) {
                 return i;
             }
         }

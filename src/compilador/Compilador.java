@@ -2,7 +2,7 @@ package compilador;
 
 /**
  *
- * @author 132683
+ * @author Daniel e Pedro Ely
  */
 
 public class Compilador {

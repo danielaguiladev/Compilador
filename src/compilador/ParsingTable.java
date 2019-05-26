@@ -2,12 +2,12 @@ package compilador;
 
 /**
  *
- * @author 132683
+ * @author Daniel e Pedro Ely
  */
 public class ParsingTable {
 
     //Tabela Preditiva   
-    String[][] preditiveTable
+    String[][] tabelaPreditiva
             = {
                 {
                     "Classe", "synch", "skip", "skip", "skip", "skip",
@@ -355,7 +355,7 @@ public class ParsingTable {
                 }
             };
 
-    static String[] nonTerminals = {"Programa", "Classe", "DeclaracaoVar",
+    static String[] naoTerminais = {"Programa", "Classe", "DeclaracaoVar",
         "ListaMetodo", "ListaMetodo’", "Metodo",
         "RegexListaParam", "RegexDeclaraVar",
         "ListaParam", "ListaParam’", "Param", "Retorno",
@@ -367,7 +367,7 @@ public class ParsingTable {
         "Exp4", "Exp4’", "RegexExp4", "RegexExp4’",
         "OpUnario"};
 
-    static String[] terminals = {"public", "static", "class", "ID", "{", "}", ";",
+    static String[] terminais = {"public", "static", "class", "ID", "{", "}", ";",
         "(", ")", ",", "return", "main", "boolean",
         "int", "string", "float", "void", "if",
         "else", "while", "print", "println", "=",

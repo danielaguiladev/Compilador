@@ -2,7 +2,7 @@ package compilador;
 
 /**
  *
- * @author 132683
+ * @author Daniel e Pedro Ely
  */
 public enum Tag {
     
@@ -11,8 +11,8 @@ public enum Tag {
     
     //Operadores
     RELOP_LT,       // <
-    RELOP_OR,       //||
-    RELOP_AND,      //&&
+    RELOP_PIPE2,    //||
+    RELOP_AND2,     //&&
     RELOP_LE,       // <=
     RELOP_GT,       // >
     RELOP_GE,       // >=
@@ -24,37 +24,22 @@ public enum Tag {
     RELOP_MULT,     // *
     RELOP_DIV,      // /
     RELOP_UNNE,     // -
-    RELOP_UNESC,    //!
-    
-    //Simbolos
-    SMB_OP,         // (
-    SMB_CP,         // )
-    SMB_OB,         // {
-    SMB_CB,         // }
-    SMB_COMMA,      // ,
-    SMB_SEMICOLON,  // ;
-    SMB_NULL,       // zerar auxnegativo
-    
-    //identificador
+    RELOP_U,        //!
+    RELOP_OP,       // (
+    RELOP_CP,       // )
+    RELOP_CHAD,     // {
+    RELOP_CHAE,     // }
+    RELOP_VIRG,     // ,
+    RELOP_SEMICOLON,  // ;
+    RELOP_NULL,
     ID,
-
-
-    //numeros
     ConstInteira,
     INTEGER,
     FLOAT,
     ConstReal,
-    
-    //String em aspas simples
-    //strings
     char_const,
-	
-    
-    //String em aspas duplas
     STRING,
     ConstString,
-    
-    // palavra reservada
     KW,
     KW_PUBLIC,
     KW_CLASS,
