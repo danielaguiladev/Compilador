@@ -722,7 +722,7 @@ public class ParserBottomUp {
                             ls = "ListaMetodo’";
                             break;
                         case 7:
-                            ls = "Metodo ";
+                            ls = "Metodo";
                             break;
                         case 8:
                             ls = "RegexListaParam";
@@ -935,22 +935,121 @@ public class ParserBottomUp {
                             ls = "OpUnario";
                             break;
                     }
-                    int indexA = 6;
+                    int indexA = -1;
                     switch (ls) {
-                        case "public":
-                            indexA = 6;
-                            break;
-                        case "static":
-                            indexA = 7;
-                            break;
-                        case "void":
-                            indexA = 8;
-                            break;
-                        case "main":
-                            indexA = 9;
+                        case "Programa":
+                            indexA = 1;
                             break;
                         case "Classe":
+                            indexA = 2;
+                            break;
+                        case "DeclaracaoVar":
+                            indexA = 3;
+                            break;
+                        case "ListaMetodo":
+                            indexA = 4;
+                            break;
+                        case "ListaMetodo’":
+                            indexA = 5;
+                            break;
+                        case "Metodo":
+                            indexA = 7;
+                            break;
+                        case "RegexListaParam":
+                            indexA = 8;
+                            break;
+                        case "RegexDeclaraVar":
                             indexA = 10;
+                            break;
+                        case "ListaParam":
+                            indexA = 12;
+                            break;
+                        case "ListaParam’":
+                            indexA = 13;
+                            break;
+                        case "Param":
+                            indexA = 15;
+                            break;
+                        case "Retorno":
+                            indexA = 16;
+                            break;
+                        case "Main":
+                            indexA = 18;
+                            break;
+                        case "Tipo":
+                            indexA = 19;
+                            break;
+                        case "ListaCmd":
+                            indexA = 24;
+                            break;
+                        case "ListaCmd’":
+                            indexA = 25;
+                            break;
+                        case "Cmd":
+                            indexA = 27;
+                            break;
+                        case "Cmd’":
+                            indexA = 33;
+                            break;
+                        case "CmdIF":
+                            indexA = 34;
+                            break;
+                        case "CmdIF’":
+                            indexA = 35;
+                            break;
+                        case "CmdWhile":
+                            indexA = 37;
+                            break;
+                        case "CmdPrint":
+                            indexA = 38;
+                            break;
+                        case "CmdPrintln":
+                            indexA = 39;
+                            break;
+                        case "CmdAtrib":
+                            indexA = 40;
+                            break;
+                        case "CmdMetodo":
+                            indexA = 41;
+                            break;
+                        case "Expressao":
+                            indexA = 42;
+                            break;
+                        case "Exp’":
+                            indexA = 43;
+                            break;
+                        case "Exp1":
+                            indexA = 46;
+                            break;
+                        case "Exp1’":
+                            indexA = 47;
+                            break;
+                        case "Exp2":
+                            indexA = 54;
+                            break;
+                        case "Exp2’":
+                            indexA = 55;
+                            break;
+                        case "Exp3":
+                            indexA = 58;
+                            break;
+                        case "Exp3’":
+                            indexA = 59;
+                            break;
+                        case "Exp4":
+                            indexA = 62;
+                            break;
+                        case "Exp4’":
+                            indexA = 70;
+                            break;
+                        case "RegexExp4":
+                            indexA = 72;
+                            break;
+                        case "RegexExp4’":
+                            indexA = 74;
+                            break;
+                        case "OpUnario":
+                            indexA = 76;
                             break;
                     }
                     int num = Integer.parseInt(parseTable[Integer.parseInt((String) s.peek())][indexA]);
