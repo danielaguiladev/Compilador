@@ -17,6 +17,7 @@ public class Lexer {
     public int erros = 0; // contador de erros
     private Tag aux;
     private static int num_c = 0;
+    private char c;
 
     public Lexer(TS ts, String input_data) {
         this.tabelaSimbolos = ts;
@@ -41,6 +42,10 @@ public class Lexer {
             System.out.println("Erro ao fechar arquivo\n" + errorFile);
             System.exit(3);
         }
+    }
+
+    public char getC() {
+        return c;
     }
 
     // Reporta erro para o usuário
@@ -89,7 +94,6 @@ public class Lexer {
 
         StringBuilder lexema = new StringBuilder();
         int estado = 1;
-        char c;
 
         while (true) {
             c = percorreArquivo();
@@ -151,7 +155,7 @@ public class Lexer {
                         sinalizaErroLexico("Caractere invalido " + c + " na linha " + n_line + " e coluna " + n_column);
                         erros++;
                     }
-                break;
+                    break;
                 case 2:
                     if (Character.isLetterOrDigit(c) || c == '_') {
                         lexema.append(c);
@@ -164,7 +168,7 @@ public class Lexer {
                         }
                         return token;
                     }
-                break;
+                    break;
                 case 3:
                     if (Character.isDigit(c)) {
                         lexema.append(c);
@@ -176,7 +180,7 @@ public class Lexer {
                         aux = Tag.INTEGER;
                         return new Token(Tag.INTEGER, lexema.toString(), n_line, n_column);
                     }
-                break;
+                    break;
                 case 4:
                     if (c == '=') {
                         return new Token(Tag.RELOP_LE, "<=", n_line, n_column);
@@ -214,7 +218,7 @@ public class Lexer {
                         retornaPonteiro();
                         return new Token(Tag.RELOP_DIV, "/", n_line, n_column);
                     }
-                break;
+                    break;
                 case 9:
                     if (c == '&') {
                         return new Token(Tag.RELOP_AND2, "&&", n_line, n_column);
@@ -222,7 +226,7 @@ public class Lexer {
                         sinalizaErroLexico("Caractere invalido " + c + " na linha " + n_line + " e coluna " + n_column);
                         erros++;
                     }
-                break;
+                    break;
                 case 10:
                     if (c == '|') {
                         return new Token(Tag.RELOP_PIPE2, "||", n_line, n_column);
@@ -230,7 +234,7 @@ public class Lexer {
                         sinalizaErroLexico("Caractere invalido " + c + " na linha " + n_line + " e coluna " + n_column);
                         erros++;
                     }
-                break;
+                    break;
                 case 11:
                     if (aux == Tag.FLOAT || aux == Tag.ID || aux == Tag.INTEGER || aux == Tag.RELOP_MINUS || aux == Tag.RELOP_OP || aux == Tag.RELOP_CP) {
                         retornaPonteiro();
@@ -260,13 +264,13 @@ public class Lexer {
                         lexema.append(c);
                         num_c++;
                     }
-                break;
+                    break;
                 case 13:
                     if (c == '\n') {
                         estado = 1;
                         n_line++;
                     }
-                break;
+                    break;
                 case 14:
                     if (c == '*') {
                         estado = 15;
@@ -277,7 +281,7 @@ public class Lexer {
                         erros++;
                         return new Token(Tag.EOF, lexema.toString(), n_line, n_column);
                     }
-                break;
+                    break;
                 case 15:
                     if (c == '/') {
                         estado = 1;
@@ -288,7 +292,7 @@ public class Lexer {
                         erros++;
                         return new Token(Tag.EOF, lexema.toString(), n_line, n_column);
                     }
-                break;
+                    break;
                 case 16:
                     if (Character.isDigit(c)) {
                         lexema.append(c);
@@ -297,7 +301,7 @@ public class Lexer {
                         aux = Tag.FLOAT;
                         return new Token(Tag.FLOAT, lexema.toString(), n_line, n_column);
                     }
-                break;
+                    break;
                 case 17:
                     if (c == '"') {
                         estado = 1;
@@ -305,7 +309,7 @@ public class Lexer {
                         aux = Tag.STRING;
                         return new Token(Tag.STRING, lexema.toString(), n_line, n_column);
                     }
-                break;
+                    break;
             }
         }
     }

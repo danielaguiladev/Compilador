@@ -10,12 +10,11 @@ public class Parser extends ParsingTable {
 
     private final Lexer lexer;
     private Token token;
-    private String resultadoParser = "";
     private String top;
     private Stack<String> pilha = new Stack<>();
     public boolean synch = false;
     public boolean skip = false;
-    public int numErros = 0;
+    public int erros = 0;
 
     public Parser(Lexer lexer) {
         this.lexer = lexer;
@@ -31,27 +30,26 @@ public class Parser extends ParsingTable {
                 top = pop();
             }
             getTokenByRegra(top, token);
-            if (naoEhTerminal(top)) {
+            if (verifica(top, naoTerminais)) {
                 String rule = this.getRegra(top, token.getLexema());
                 this.pushRegra(rule);
-            } else if (ehTerminal(top)) {
+            } else if (verifica(top, terminais)) {
                 if (!top.equals(token.getLexema())) {
-                    resultadoParser += "Erro Sintático (Skip): Token Inesperado: ( " + token.getLexema() + " ) " + "\n";
+                    exibeErro("Erro Sintático (Skip): Token Inesperado: ( " + token.getLexema() + " ) ");
                     ProxToken();
                     skip = true;
                 } else {
                     skip = false;
-                    System.out.println("Matching terminal: ( " + token.getLexema() + " )");
-                    resultadoParser += "Matching terminal: ( " + token.getLexema() + " )\n";
+                    System.out.println("Terminal: ( " + token.getLexema() + " )");
                     ProxToken();
                 }
             }
             if (token.getLexema().equals("EOF")) {
-                resultadoParser += "Matching terminal: ( " + token.getLexema() + " )\n";
+                System.out.println("Fim da análise: " + token.getLexema());
                 break;
             }
 
-            if (numErros == 5) {
+            if (erros == 5) {
                 break;
             }
         } while (true);
@@ -81,25 +79,15 @@ public class Parser extends ParsingTable {
 
     private void pushRegra(String regra) {
         String[] splitRegra = regra.split("\\s+");
-        resultadoParser += regra + "\n";
         for (int i = splitRegra.length - 1; i >= 0; i--) {
             String regraAt = splitRegra[i];
             push(regraAt);
         }
     }
 
-    private boolean ehTerminal(String s) {
-        for (String terminal : terminais) {
-            if (s.equals(terminal)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean naoEhTerminal(String s) {
-        for (String nonTerminal : naoTerminais) {
-            if (s.equals(nonTerminal)) {
+    private boolean verifica(String s, String[] ss) {
+        for (String x : ss) {
+            if (s.equals(x)) {
                 return true;
             }
         }
@@ -121,29 +109,28 @@ public class Parser extends ParsingTable {
     }
 
     private void exibeErro(String message) {
-        resultadoParser += message + "\n";
-        System.out.println(resultadoParser);
+        System.out.println("Erro semântico: " + message);
     }
-    
+
     private void sync() {
-        exibeErro("Erro (Synch): ( " + token.getLexema() + " ) ");
-        numErros++;
+        exibeErro("(Synch): ( " + token.getLexema() + " ) ");
+        erros++;
         top = pop();
         String rule = this.getRegra(top, token.getLexema());
         this.pushRegra(rule);
         skip = false;
     }
-    
+
     private void skip() {
-        exibeErro("Erro (Skip): ( " + token.getLexema() + " ) ");
-        numErros++;
+        exibeErro("(Skip): ( " + token.getLexema() + " ) ");
+        erros++;
         ProxToken();
         skip = true;
     }
 
     private String getRegra(String nT, String terminal) {
-        int row = getNaoTerminal(nT);
-        int column = getTerminal(terminal);
+        int row = busca(nT, naoTerminais);
+        int column = busca(terminal, terminais);
 
         String regra = tabelaPreditiva[row][column];
 
@@ -161,23 +148,13 @@ public class Parser extends ParsingTable {
         return regra;
     }
 
-    private int getNaoTerminal(String nT) {
-        for (int i = 0; i < naoTerminais.length; i++) {
-            if (nT.equals(naoTerminais[i])) {
+    private int busca(String terminal, String[] ss) {
+        for (int i = 0; i < ss.length; i++) {
+            if (terminal.equals(ss[i])) {
                 return i;
             }
         }
-        exibeErro(nT + " não é um não terminal");
-        return -1;
-    }
-
-    private int getTerminal(String terminal) {
-        for (int i = 0; i < terminais.length; i++) {
-            if (terminal.equals(terminais[i])) {
-                return i;
-            }
-        }
-        exibeErro(terminal + " não é um Terminal");
+        exibeErro("ERROR" + terminal);
         return -1;
     }
 }
