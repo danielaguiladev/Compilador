@@ -27,6 +27,10 @@ public class No {
         this.pai = token;
         this.listaFilhos = new ArrayList<>();
     }
+    
+    public void setTipo(Integer tipo){
+        this.tipo = tipo;
+    }
 
     public Token getPai() {
         return pai;

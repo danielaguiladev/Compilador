@@ -54,7 +54,6 @@ public class Parser extends ParsingTable {
                 verificaSemantica();
                 break;
             }
-
             if (erros == 5) {
                 break;
             }
@@ -70,20 +69,37 @@ public class Parser extends ParsingTable {
                         noClass.setPai(tokenAuxList.get(x));
                     } else {
                         No noFilho = new No(tokenAuxList.get(x));
+                        String aux = tokenAuxList.get(x).getClasse().toString();
+                        switch (aux) {
+                            case "KW_BOOLEAN":
+                                noFilho.setTipo(100);
+                                break;
+                            case "KW_INTEGER":
+                                noFilho.setTipo(101);
+                                break;
+                            case "KW_STRING":
+                                noFilho.setTipo(102);
+                                break;
+                            case "KW_DOUBLE":
+                                noFilho.setTipo(103);
+                                break;
+                        }
                         noClass.addFilho(noFilho);
                     }
                     if (parts[x].equals(tokenAuxList.get(x).getLexema())) {
                         System.out.println(parts[x] + " == " + tokenAuxList.get(x).getLexema());
                     } else {
+                        No noFilho = new No(tokenAuxList.get(x));
+                        noFilho.setTipo(104);
+                        noClass.addFilho(noFilho);
                         System.out.println("ERRO semantico: Esperado " + parts[x] + ", encontrado: " + tokenAuxList.get(x).getLexema());
                     }
                 }
             });
         }
-        ArrayList<No> a = noClass.getFilhos();
-        for(No x : noClass.getFilhos()){
-            System.out.println("Nó\t" + x.tipo);
-        }
+        noClass.getFilhos().stream().forEach((x) -> {
+            System.out.println("Nó tipo: " + x.tipo);
+        });
     }
 
     public void getTokenByRegra(String top, Token token) {
