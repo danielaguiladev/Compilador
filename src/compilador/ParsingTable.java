@@ -267,7 +267,7 @@ public class ParsingTable {
                     "skip", "skip", "skip", "skip", "skip", "skip", "ε",
                     "skip", "ε", "ε", "skip", "skip", "skip", "skip", "skip",
                     "skip", "skip", "skip", "skip", "skip", "skip",
-                    "skip", "skip", "ε", "ε", "< Exp2 Exp1’", "<= Exp2 Exp1’ ",
+                    "skip", "skip", "ε", "ε", "< Exp2 Exp1’", "<= Exp2 Exp1’",
                     "> Exp2 Exp1’", ">= Exp2 Exp1’", "== Exp2 Exp1’",
                     "!= Exp2 Exp1’", "skip", "skip", "skip", "skip", "skip",
                     "skip", "skip", "skip", "skip", "skip", "skip"

@@ -23,7 +23,7 @@ public class ParserBottomUp {
     public static int getIndex(String token) throws IOException {
         int indexA = -1;
         switch (token) {
-            case "id":
+            case "ID":
                 indexA = 0;
                 break;
             case "+":
@@ -681,7 +681,7 @@ public class ParserBottomUp {
             String action = parseTable[Integer.parseInt((String) s.peek())][index];
             switch (action) {
                 case "skip":
-                    String number = parseTable[Integer.parseInt((String) s.peek())][index].substring(1);
+                    String number = parseTable[Integer.parseInt((String) s.peek())][index];
                     String ri = remainingInput(inputString, number_Of_Tokens, tokenCount);
                     number_Of_Tokens++;
                     System.out.printf("%-30s %20s %s %s\n", s.toString(), ri, "Shift by  ", action);
@@ -690,7 +690,7 @@ public class ParserBottomUp {
                     str = st.nextToken();
                     break;
                 case "sync":
-                    number = parseTable[Integer.parseInt((String) s.peek())][index].substring(1);
+                    number = parseTable[Integer.parseInt((String) s.peek())][index];
                     String rule = rule(action);
                     String rin = remainingInput(inputString, number_Of_Tokens, tokenCount);
                     System.out.printf("%-30s %20s %s %s %s %s %s\n", s.toString(), rin, "Reduce by  ", rule, "(", action, ")");
